@@ -42,6 +42,7 @@ nav.side a.cur{background:var(--pale)}
 main{flex:1;min-width:0;padding:28px 40px 120px;max-width:920px}
 h1{font-size:30px;color:var(--ink);margin:6px 0 4px;line-height:1.35}
 .sub{color:var(--mute);margin:0 0 24px}
+h2.day .tm{margin-left:14px;color:var(--mute);font-weight:500}
 h2.day{margin:56px 0 4px;font-size:15px;color:var(--deep);letter-spacing:.02em}
 h2.period{margin:0 0 18px;font-size:26px;color:var(--ink);padding-bottom:10px;border-bottom:2px solid var(--key)}
 section.step{margin:34px 0 0}
@@ -126,8 +127,9 @@ footer{margin-top:60px;color:var(--mute);font-size:13px;border-top:1px solid var
 <div class="wrap">
 <nav class="side" id="side">
   <h4>시작하기 전에</h4>
-  <a href="#howto"><b>안내</b>이 문서 쓰는 법</a>
-  <a href="#rules"><b>약속</b>실습 전 꼭 지킬 것</a>
+  <a href="#howto"><b>안내</b>가이드 활용법</a>
+  <a href="#prep"><b>준비</b>노트북 사전 점검</a>
+  <a href="#rules"><b>확인</b>실습 전 확인 사항</a>
   <h4>1일차 6교시: 배포</h4>
   <a href="#s0"><b>0</b>AWS에 서버 만들기</a>
   <a href="#s1"><b>1</b>노트북에서 서버 접속</a>
@@ -162,23 +164,23 @@ footer{margin-top:60px;color:var(--mute);font-size:13px;border-top:1px solid var
 
 <main>
 <h1>서버부터 클라우드까지,<br>실습으로 배우는 IT 인프라</h1>
-<p class="sub">1일차, 2일차 실습 가이드 · 강사 제이드(JAD) 장두환</p>
+<p class="sub">1일차, 2일차 실습 가이드<br>강사 제이드(JAD) 장두환</p>
 
 <section id="howto">
-<h2 class="period">이 문서 쓰는 법</h2>
+<h2 class="period">이 가이드 문서 활용법</h2>
 <ol>
   <li><b>오른쪽 위에서 내 노트북을 고르세요.</b> Windows와 Mac이 다른 곳은 고른 쪽 안내만 보입니다.</li>
   <li><b>서버를 만든 뒤 오른쪽 위 칸에 퍼블릭 IP를 넣으세요.</b> 아래 명령 속 <code class="i">퍼블릭IP</code>가 내 주소로 바뀝니다.</li>
-  <li><b>명령은 손으로 치지 말고 <code class="i">복사</code> 버튼을 누른 뒤 붙여 넣으세요.</b> 오타 하나로 한참 헤매게 됩니다.</li>
-  <li>단계가 끝나면 제목 옆 <b>완료</b>에 체크하세요. 왼쪽 목차에 표시가 남습니다. 막혀서 손을 들 때 "지금 7-2 단계예요"처럼 번호로 말해 주세요.</li>
+  <li><b>명령은 <code class="i">복사</code> 버튼으로 복사해 붙여 넣습니다.</b> 여러 줄 명령도 그대로 복사됩니다.</li>
+  <li>단계를 마치면 제목 옆 <b>완료</b>에 체크하세요. 왼쪽 목차에 표시가 남습니다. 질문할 때 단계 번호(예: Step 7-2)를 알려 주시면 바로 확인할 수 있습니다.</li>
 </ol>
 <div class="box key">
   <b class="t">명령 상자의 색</b>
   <p><span style="background:#1F1F1F;color:#FFD36B;padding:0 6px;border-radius:4px;font-weight:700">노란 글자</span>는 내 퍼블릭 IP로 바뀌는 부분, <span style="background:#1F1F1F;color:#FF9E7A;padding:0 6px;border-radius:4px;font-weight:700">주황 글자</span>는 붙여 넣은 뒤 <b>직접 바꿔야 하는 부분</b>입니다. 회색 상자는 입력하는 명령이 아니라 화면에 나오는 결과 예시입니다.</p>
 </div>
 
-<h4>Windows와 Mac, 무엇이 다른가</h4>
-<p>서버에 접속한 뒤(Step 2부터)는 모두 같은 명령을 씁니다. 다른 건 노트북 쪽에서 하는 일뿐입니다.</p>
+<h4>Windows와 Mac의 차이</h4>
+<p>서버에 접속한 뒤(Step 2부터)는 모두 같은 명령을 씁니다. 차이는 노트북에서 하는 작업에만 있습니다.</p>
 <table>
 <tr><th>상황</th><th>Windows</th><th>Mac</th></tr>
 <tr><td>쓰는 프로그램</td><td>PowerShell (시작 메뉴에서 검색)</td><td>터미널 (<kbd>Cmd</kbd>+<kbd>Space</kbd> → "터미널")</td></tr>
@@ -189,10 +191,42 @@ footer{margin-top:60px;color:var(--mute);font-size:13px;border-top:1px solid var
 </table>
 </section>
 
-<section id="rules">
-<h2 class="period">실습 전 꼭 지킬 것</h2>
+<section id="prep">
+<h2 class="period">노트북 사전 점검</h2>
+<p>실습은 노트북 터미널에서 SSH로 서버에 접속해서 진행합니다. 클라우드마다 콘솔 화면은 다르지만, 리눅스 서버에 SSH로 접속하는 방식은 AWS, Azure, GCP, 국내 클라우드 모두 같습니다. 강의 전에 아래 두 가지를 확인해 주세요.</p>
+
+<h4><span class="sn">1</span>SSH 프로그램 설치 여부</h4>
+<div class="os win">
+<p>PowerShell에서 실행합니다.</p>
+<div class="cmd"><pre><code>ssh -V</code></pre></div>
+<p><code class="i">OpenSSH_for_Windows_...</code>처럼 버전이 나오면 준비 완료입니다. "인식되지 않습니다"가 나오면 설정 → 앱 → 선택적 기능 → <b>OpenSSH 클라이언트</b>를 추가합니다.</p>
+<div class="box warn"><b class="t">회사 노트북이라면</b><p>보안 정책으로 OpenSSH가 빠져 있거나 설치가 막혀 있을 수 있습니다. 설치가 안 되면 강의 당일에는 개인 노트북을 준비해 주세요.</p></div>
+</div>
+<div class="os mac">
+<p>터미널에서 실행합니다.</p>
+<div class="cmd"><pre><code>ssh -V</code></pre></div>
+<p>Mac에는 기본으로 설치돼 있어서 <code class="i">OpenSSH_9...</code>처럼 버전이 나옵니다.</p>
+</div>
+
+<h4><span class="sn">2</span>외부 22번 포트 연결 가능 여부</h4>
+<p>실습 서버가 없어도 확인할 수 있습니다. 강의 당일에는 강의장 Wi-Fi에 연결한 상태로 한 번 더 확인합니다.</p>
+<div class="os win"><div class="cmd"><pre><code>Test-NetConnection github.com -Port 22</code></pre></div>
+<p><code class="i">TcpTestSucceeded : True</code>가 나오면 정상입니다.</p></div>
+<div class="os mac"><div class="cmd"><pre><code>nc -zv github.com 22</code></pre></div>
+<p><code class="i">succeeded</code>가 나오면 정상입니다.</p></div>
+
+<div class="box key"><b class="t">22번 포트가 막혀 있다면</b>
 <ul>
-  <li><b>비밀번호, <code class="i">.env</code> 내용, <code class="i">.pem</code> 키 파일은 캡처하거나 메신저로 보내지 않습니다.</b> 막히면 화면을 캡처해 올리지 말고 손을 들어 주세요.</li>
+  <li><b>휴대폰 테더링</b>으로 연결을 바꾼 뒤 다시 확인합니다. 모바일 데이터는 22번 포트를 대부분 막지 않습니다.</li>
+  <li>SSH는 텍스트만 주고받아 데이터 사용량이 적습니다. <code class="i">npm install</code>, Kiro 설치처럼 용량이 큰 내려받기는 AWS 서버에서 일어나므로 휴대폰 데이터와 관계없습니다.</li>
+  <li>테더링도 어렵다면 Step 1 아래의 <b>브라우저로 접속하기</b>를 씁니다.</li>
+</ul></div>
+</section>
+
+<section id="rules">
+<h2 class="period">실습 전 확인 사항</h2>
+<ul>
+  <li><b>비밀번호, <code class="i">.env</code> 내용, <code class="i">.pem</code> 키 파일은 캡처하거나 메신저로 보내지 않습니다.</b></li>
   <li><b>AWS 콘솔에서 "업그레이드", "고급 기능 활성화"는 누르지 않습니다.</b> 유료 플랜으로 바뀌어 요금이 나갈 수 있습니다.</li>
   <li><b>1일차가 끝나도 인스턴스를 중지하거나 종료하지 않습니다.</b> 2일차에 같은 서버를 이어서 씁니다. 종료는 2일차 마지막 Step 19에서 함께 합니다.</li>
   <li>여기서 쓰는 서버는 실습용입니다. 2일차에 일부러 고장 내는 실습은 실제 운영 서버에서는 하지 않습니다.</li>
@@ -200,19 +234,19 @@ footer{margin-top:60px;color:var(--mute);font-size:13px;border-top:1px solid var
 </section>
 
 <!-- ======================= 1일차 6교시 ======================= -->
-<h2 class="day">1일차 6교시 · 15:30 - 16:30</h2>
+<h2 class="day">1일차 6교시<span class="tm">15:30 - 16:30</span></h2>
 <h2 class="period">내 서비스를 실제 인프라에서 실행하기</h2>
 <div class="toc-inline">
   <a href="#s0">Step 0 - 1<span>AWS에 서버를 만들고 접속</span></a>
   <a href="#s2">Step 2 - 6<span>Node.js, DB, 앱 코드, .env</span></a>
   <a href="#s7">Step 7 - 9<span>빌드, 서비스 등록, Nginx 연결</span></a>
 </div>
-<p>6교시 안에 Step 9까지 못 끝내도 괜찮습니다. 7교시 앞부분에 이어서 마칠 시간이 있습니다.</p>
+<p>6교시 안에 Step 9까지 못 끝내면 7교시 앞부분에 이어서 진행합니다.</p>
 
 <section class="step" id="s0">
 <div class="step-head"><span class="no">Step 0</span><h3>AWS에 내 서버(인스턴스) 만들기</h3><label><input type="checkbox" data-done="s0">완료</label></div>
 
-<h4><span class="sn">0-1</span>리전 확인하고 EC2로 가기</h4>
+<h4><span class="sn">0-1</span>리전 확인과 EC2 이동</h4>
 <ol>
   <li><a href="https://console.aws.amazon.com" target="_blank" rel="noopener">AWS 콘솔</a>에 로그인합니다.</li>
   <li>리전은 <b>계정에 할당된 그대로</b> 씁니다. 새 무료 플랜 계정은 리전 하나로 정해져 있고(예: 시드니), 다른 리전은 유료 플랜이 필요합니다. 서울이 아니어도 실습에는 문제없습니다.</li>
@@ -233,7 +267,7 @@ footer{margin-top:60px;color:var(--mute);font-size:13px;border-top:1px solid var
 <ol>
   <li><b>키 페어(로그인)</b> 오른쪽의 <b>새 키 페어 생성</b>을 누릅니다.</li>
   <li>이름 <code class="i">quotation-key</code>, 유형 <b>RSA</b>, 형식 <b>.pem</b> → <b>키 페어 생성</b></li>
-  <li><b>다운로드 폴더</b>에 <code class="i">quotation-key.pem</code>이 생겼는지 확인합니다. 이 파일이 없으면 서버에 들어갈 수 없고, AWS는 다시 내려받게 해 주지 않습니다.</li>
+  <li><b>다운로드 폴더</b>에 <code class="i">quotation-key.pem</code>이 생겼는지 확인합니다. 이 파일이 없으면 서버에 접속할 수 없고, 다시 내려받을 수도 없습니다.</li>
 </ol>
 
 <h4><span class="sn">0-5</span>네트워크 설정 (보안그룹)</h4>
@@ -243,9 +277,9 @@ footer{margin-top:60px;color:var(--mute);font-size:13px;border-top:1px solid var
   <li><b>인터넷에서 HTTPS 트래픽 허용</b>: 체크하지 않음</li>
   <li><b>인터넷에서 HTTP 트래픽 허용</b>: <b>직접 체크</b></li>
 </ul>
-<p>아래에 0.0.0.0/0 경고가 노랗게 떠도 실습에서는 그대로 진행합니다. 이렇게 하면 22번(SSH)과 80번(HTTP) 포트만 열립니다. DB가 쓰는 5432번은 열지 않습니다.</p>
+<p>아래에 0.0.0.0/0 관련 노란 경고가 나와도 실습에서는 그대로 진행합니다. 이렇게 하면 22번(SSH)과 80번(HTTP) 포트만 열립니다. DB가 쓰는 5432번은 열지 않습니다.</p>
 
-<h4><span class="sn">0-6</span>스토리지 확인하고 시작</h4>
+<h4><span class="sn">0-6</span>스토리지 확인과 인스턴스 시작</h4>
 <ol>
   <li><b>스토리지 구성</b>은 기본값(8GiB, gp3) 그대로</li>
   <li>오른쪽 <b>요약</b>에서 이름, OS, 유형, 키 페어, 보안그룹, 스토리지 여섯 가지 확인</li>
@@ -256,7 +290,7 @@ footer{margin-top:60px;color:var(--mute);font-size:13px;border-top:1px solid var
 <ol>
   <li>인스턴스 상태가 <b>실행 중</b>이 될 때까지 기다립니다 (보통 1분 안, 새로고침 버튼 사용).</li>
   <li>내 인스턴스 줄을 누르면 아래에 세부 정보가 나옵니다. <b>퍼블릭 IPv4 주소</b>를 복사합니다.</li>
-  <li><b>이 문서 오른쪽 위 "내 퍼블릭 IP" 칸에 붙여 넣으세요.</b> 이제부터 명령의 <code class="i">퍼블릭IP</code>가 내 주소로 바뀝니다.</li>
+  <li><b>이 가이드 오른쪽 위 "내 퍼블릭 IP" 칸에 붙여 넣으세요.</b> 이제부터 명령의 <code class="i">퍼블릭IP</code>가 내 주소로 바뀝니다.</li>
 </ol>
 </section>
 
@@ -275,11 +309,11 @@ footer{margin-top:60px;color:var(--mute);font-size:13px;border-top:1px solid var
 </div>
 <p>처음 접속하면 아래 질문이 나옵니다. <code class="i">yes</code>를 <b>끝까지</b> 입력하고 엔터 (<code class="i">y</code>만 치면 안 됩니다).</p>
 <div class="cmd out tagged"><span class="tag">화면</span><pre><code>Are you sure you want to continue connecting (yes/no/[fingerprint])?</code></pre></div>
-<div class="box okb"><b class="t">정상이면</b><p><code class="i">Welcome to Ubuntu 26.04 ...</code>가 나오고 마지막 줄이 <code class="i">ubuntu@ip-172-...:~$</code>로 바뀝니다. 이제부터 이 창은 <b>서버</b>입니다. 여기서부터는 Windows와 Mac의 명령이 같습니다.</p></div>
+<div class="box okb"><b class="t">정상이면</b><p><code class="i">Welcome to Ubuntu 26.04 ...</code>가 나오고 마지막 줄이 <code class="i">ubuntu@ip-172-...:~$</code>로 바뀝니다. 이제부터 이 창에 입력하는 명령은 <b>서버</b>에서 실행됩니다. 여기서부터는 Windows와 Mac의 명령이 같습니다.</p></div>
 <h4>안 되면</h4>
 <table>
 <tr><th>화면에 보이는 것</th><th>할 일</th></tr>
-<tr><td><code class="i">Connection timed out</code></td><td>퍼블릭 IP 오타, 보안그룹 22번, 인스턴스가 <b>실행 중</b>인지 확인</td></tr>
+<tr><td><code class="i">Connection timed out</code></td><td>퍼블릭 IP 오타, 보안그룹 22번, 인스턴스가 <b>실행 중</b>인지 확인. 모두 맞다면 강의장 Wi-Fi가 22번 포트를 막고 있을 수 있으니 <a href="#prep">사전 점검 2</a>로 확인하고 휴대폰 테더링으로 바꿔 다시 접속</td></tr>
 <tr><td><code class="i">Permission denied (publickey)</code></td><td>사용자 이름이 <code class="i">ubuntu</code>인지, 키 파일 이름이 맞는지 확인</td></tr>
 <tr><td><code class="i">UNPROTECTED PRIVATE KEY FILE</code> / <code class="i">bad permissions</code></td><td><span class="os mac">Mac: <code class="i">chmod 400 quotation-key.pem</code> 다시 실행</span><span class="os win">Windows: 아래 두 줄 실행 후 다시 접속</span></td></tr>
 </table>
@@ -288,6 +322,14 @@ footer{margin-top:60px;color:var(--mute);font-size:13px;border-top:1px solid var
 icacls .\quotation-key.pem /grant:r "$($env:USERNAME):(R)"</code></pre></div>
 <p class="osnote"><code class="i">ssh</code>를 인식하지 못한다고 나오면: 설정 → 앱 → 선택적 기능 → <b>OpenSSH 클라이언트</b> 추가</p>
 </div>
+<div class="box"><b class="t">노트북 SSH를 쓸 수 없을 때: 브라우저로 접속하기</b>
+<p>OpenSSH를 설치할 수 없거나 테더링으로도 22번 포트가 막힐 때 쓰는 대안입니다. AWS 콘솔이 서버에 대신 접속해 주므로 키 파일이 필요 없고, 강의장 네트워크의 22번 차단과도 상관없습니다.</p>
+<ol>
+  <li>AWS 콘솔 → EC2 → <b>인스턴스</b>에서 내 인스턴스를 체크하고 위쪽 <b>연결</b>을 누릅니다.</li>
+  <li><b>EC2 Instance Connect</b> 탭에서 사용자 이름이 <code class="i">ubuntu</code>인지 확인하고 <b>연결</b>을 누릅니다.</li>
+  <li>브라우저 새 탭에 서버 터미널이 열립니다. 이후 명령은 Step 2부터 같습니다. 창이 두 개 필요한 단계에서는 같은 방법으로 탭을 하나 더 엽니다.</li>
+</ol>
+<p class="osnote">브라우저 터미널은 붙여 넣기 단축키가 브라우저와 겹치거나 오래 두면 접속이 끊길 수 있습니다. 가능하면 노트북 SSH를 먼저 쓰세요.</p></div>
 <div class="box"><b class="t">실습 중 접속이 끊기면</b><p>서버에 설치한 것은 그대로 있습니다. 같은 명령으로 다시 접속해서 하던 단계부터 이어 가면 됩니다. <code class="i">command not found</code>가 나오면 먼저 프롬프트가 <code class="i">ubuntu@ip-...</code>인지(서버 안인지) 확인하세요.</p></div>
 </section>
 
@@ -324,7 +366,7 @@ icacls .\quotation-key.pem /grant:r "$($env:USERNAME):(R)"</code></pre></div>
 <div class="cmd"><pre><code>CREATE DATABASE quotation_lab OWNER quotation_app;</code></pre></div>
 <p><code class="i">CREATE DATABASE</code>가 나오면 성공입니다. 줄 끝 <code class="i">;</code>를 빼먹으면 아무 반응 없이 프롬프트가 <code class="i">postgres-#</code>로 바뀝니다. 그럴 땐 <code class="i">;</code>만 입력하고 엔터.</p>
 
-<h4><span class="sn">4-4</span>확인하고 나가기</h4>
+<h4><span class="sn">4-4</span>확인 후 나가기</h4>
 <div class="cmd"><pre><code>\l quotation_lab</code></pre></div>
 <p><code class="i">Owner</code> 칸에 <code class="i">quotation_app</code>이 보이면 됩니다. 화면 맨 아래에 <code class="i">(END)</code>가 보이면 <kbd>q</kbd>를 눌러 닫습니다.</p>
 <div class="cmd"><pre><code>\q</code></pre></div>
@@ -338,7 +380,7 @@ icacls .\quotation-key.pem /grant:r "$($env:USERNAME):(R)"</code></pre></div>
 <div class="cmd"><pre><code>wget https://github.com/jdinmysoul-boop/quotation-lab/releases/download/v1.0.0/quotation-lab.zip -O quotation-lab.zip</code></pre></div>
 <p>마지막 줄에 <code class="i">'quotation-lab.zip' saved</code>가 나오면 됩니다.</p>
 
-<h4><span class="sn">5-2</span>압축 풀기 도구 설치 후 풀기</h4>
+<h4><span class="sn">5-2</span>unzip 설치와 압축 풀기</h4>
 <p>Ubuntu 26.04에는 <code class="i">unzip</code>이 기본으로 없어서 먼저 설치합니다.</p>
 <div class="cmd"><pre><code>sudo apt install -y unzip</code></pre></div>
 <div class="cmd"><pre><code>unzip quotation-lab.zip</code></pre></div>
@@ -356,7 +398,7 @@ ls -a</code></pre></div>
 <table>
 <tr><th>화면에 보이는 것</th><th>할 일</th></tr>
 <tr><td><code class="i">password authentication failed</code></td><td>비밀번호 오타, 다시 실행해서 정확히 입력</td></tr>
-<tr><td><code class="i">permission denied for schema public</code></td><td>4-3에서 <code class="i">OWNER quotation_app</code> 없이 DB를 만든 경우, 손 들기</td></tr>
+<tr><td><code class="i">permission denied for schema public</code></td><td>4-3에서 <code class="i">OWNER quotation_app</code> 없이 DB를 만든 경우, 도움 요청</td></tr>
 </table>
 </section>
 
@@ -364,8 +406,8 @@ ls -a</code></pre></div>
 <div class="step-head"><span class="no">Step 6</span><h3>환경변수(.env) 파일 만들기</h3><label><input type="checkbox" data-done="s6">완료</label></div>
 <div class="cmd"><pre><code>cp .env.example .env
 nano .env</code></pre></div>
-<p>편집기 화면으로 바뀝니다. 마우스는 안 되고 <b>방향키</b>로 움직입니다. 아래처럼 되도록 고칩니다. <code class="i">PGPASSWORD=</code> 뒤에는 4-3에서 정한 비밀번호(따옴표 없이).</p>
-<div class="cmd out tagged"><span class="tag">이렇게 되도록</span><pre><code>PGHOST=localhost
+<p>편집기 화면으로 바뀝니다. 마우스는 쓸 수 없고 <b>방향키</b>로 움직입니다. 아래처럼 되도록 고칩니다. <code class="i">PGPASSWORD=</code> 뒤에는 4-3에서 정한 비밀번호(따옴표 없이).</p>
+<div class="cmd out tagged"><span class="tag">수정 결과</span><pre><code>PGHOST=localhost
 PGPORT=5432
 PGUSER=quotation_app
 PGPASSWORD=<span class="ph">원하는_비밀번호</span>
@@ -377,13 +419,13 @@ PGDATABASE=quotation_lab</code></pre></div>
 <tr><td><kbd>Ctrl</kbd>+<kbd>X</kbd> → <kbd>Y</kbd> → <kbd>엔터</kbd></td><td>저장하고 나가기 (아래에 파일 이름 <code class="i">.env</code>가 보이면 엔터)</td></tr>
 </table>
 <p class="osnote os mac">Mac도 <kbd>Cmd</kbd>가 아니라 <kbd>control</kbd> 키입니다.</p>
-<div class="box warn"><b class="t">이 화면은 캡처하지 마세요</b><p>비밀번호가 그대로 보이는 화면입니다. 막히면 손을 들어 주세요.</p></div>
+<div class="box warn"><b class="t">캡처 금지</b><p>비밀번호가 그대로 보이는 화면입니다.</p></div>
 </section>
 
 <section class="step" id="s7">
 <div class="step-head"><span class="no">Step 7</span><h3>스왑 추가, 앱 설치와 빌드</h3><label><input type="checkbox" data-done="s7">완료</label></div>
 <h4><span class="sn">7-0</span>스왑 2GB 추가 (필수)</h4>
-<p>우리 서버는 메모리가 1GB라서, 빌드할 때나 2일차에 Kiro를 띄울 때 메모리가 모자랄 수 있습니다. 디스크 일부를 메모리 대신 쓰는 스왑을 먼저 만듭니다.</p>
+<p>실습 서버는 메모리가 1GB라서, 빌드할 때나 2일차에 Kiro를 띄울 때 메모리가 모자랄 수 있습니다. 디스크 일부를 메모리 대신 쓰는 스왑을 먼저 만듭니다.</p>
 <div class="cmd"><pre><code>sudo fallocate -l 2G /swapfile
 sudo chmod 600 /swapfile
 sudo mkswap /swapfile
@@ -399,9 +441,9 @@ free -h</code></pre></div>
 <p>1분 정도 걸립니다. 마지막에 페이지 목록 표가 나오고 프롬프트로 돌아오면 완료입니다.</p>
 <div class="box warn"><b class="t">빌드가 멈추거나 <code class="i">Killed</code>, <code class="i">heap out of memory</code>가 나오면</b><p><code class="i">free -h</code>로 Swap 줄이 2.0Gi인지 확인하고, 없으면 7-0을 다시 한 뒤 <code class="i">npm run build</code>를 다시 실행합니다.</p></div>
 
-<h4><span class="sn">7-2</span>임시로 실행해서 확인</h4>
+<h4><span class="sn">7-2</span>임시 실행으로 확인</h4>
 <div class="cmd"><pre><code>npm start</code></pre></div>
-<p><code class="i">✓ Ready in ...</code>이 나오고 멈춰 있으면 정상입니다 (앱이 켜져 있는 상태).</p>
+<p><code class="i">✓ Ready in ...</code>이 나온 뒤 입력을 받지 않고 멈춰 있으면 정상입니다. 앱이 실행 중인 상태입니다.</p>
 <p>창을 하나 더 열어 같은 서버에 접속합니다. <span class="os win">PowerShell을 하나 더 실행해서</span><span class="os mac"><kbd>Cmd</kbd>+<kbd>T</kbd>로 새 탭을 열어서</span> Step 1의 명령을 그대로 실행하세요.</p>
 <div class="os win"><div class="cmd"><pre><code>cd $HOME\Downloads
 ssh -i .\quotation-key.pem ubuntu@<span class="ip">퍼블릭IP</span></code></pre></div></div>
@@ -452,7 +494,7 @@ sudo systemctl status quotation-lab</code></pre></div>
                 try_files $uri $uri/ =404;
         }</code></pre></div>
 <ol>
-  <li><code class="i">try_files ...</code> 줄로 커서를 옮기고 <kbd>Ctrl</kbd>+<kbd>K</kbd>로 <b>지웁니다</b>. (위의 <code class="i">#</code> 두 줄도 지워도 됩니다)</li>
+  <li><code class="i">try_files ...</code> 줄로 커서를 옮기고 <kbd>Ctrl</kbd>+<kbd>K</kbd>로 <b>지웁니다</b>. 위의 <code class="i">#</code> 주석 두 줄은 지워도 됩니다.</li>
   <li>그 자리에 아래 세 줄을 붙여 넣습니다.</li>
 </ol>
 <div class="cmd"><pre><code>                proxy_pass http://localhost:3000;
@@ -474,12 +516,12 @@ sudo systemctl status nginx</code></pre></div>
 </section>
 
 <!-- ======================= 1일차 7교시 ======================= -->
-<h2 class="day">1일차 7교시 · 16:30 - 17:30</h2>
+<h2 class="day">1일차 7교시<span class="tm">16:30 - 17:30</span></h2>
 <h2 class="period">흐름 확인과 배포 문제 해결</h2>
 <p>6교시 단계를 다 못 끝냈다면 지금 이어서 진행하세요.</p>
 
 <section class="step" id="s10">
-<div class="step-head"><span class="no">Step 10</span><h3>요청이 DB까지 가는지 확인하기</h3><label><input type="checkbox" data-done="s10">완료</label></div>
+<div class="step-head"><span class="no">Step 10</span><h3>요청이 DB까지 전달되는지 확인</h3><label><input type="checkbox" data-done="s10">완료</label></div>
 <h4><span class="sn">10-1</span>브라우저로 접속</h4>
 <p>노트북 브라우저 주소창에 아래 주소를 입력합니다. <b>https가 아니라 http</b>입니다.</p>
 <div class="cmd"><pre><code>http://<span class="ip">퍼블릭IP</span></code></pre></div>
@@ -491,10 +533,10 @@ sudo systemctl status nginx</code></pre></div>
   <li><b>새 견적서를 저장했습니다.</b> 알림 확인</li>
   <li>오른쪽 위 <b>불러오기 / 삭제</b>에서 방금 저장한 견적서가 보이면 성공</li>
 </ol>
-<p>저장이 안 되면 서버에서 로그를 확인하고 손을 들어 주세요.</p>
+<p>저장이 안 되면 서버에서 로그를 확인합니다. <code class="i">password authentication failed</code>면 <code class="i">.env</code> 비밀번호, <code class="i">permission denied</code>면 Step 4의 DB 생성 단계를 확인합니다.</p>
 <div class="cmd"><pre><code>sudo journalctl -u quotation-lab -n 50</code></pre></div>
 
-<h4><span class="sn">10-3</span>한 층씩 확인 (서버에서)</h4>
+<h4><span class="sn">10-3</span>구간별 확인 (서버에서)</h4>
 <div class="cmd"><pre><code>curl -I http://localhost:3000</code></pre></div>
 <div class="cmd"><pre><code>curl -I http://localhost</code></pre></div>
 <p>두 결과 모두 첫 줄이 <code class="i">HTTP/1.1 200 OK</code>면 정상입니다. 첫 번째는 앱에 직접, 두 번째는 Nginx를 거쳐서 요청한 것입니다. Nginx를 거친 쪽에만 <code class="i">Server: nginx</code> 줄이 있습니다.</p>
@@ -520,13 +562,13 @@ sudo systemctl status nginx</code></pre></div>
 <div class="cmd"><pre><code>sudo nano /etc/nginx/sites-available/default</code></pre></div>
 <p>Step 9에서 넣은 <code class="i">proxy_pass http://localhost:3000;</code> 줄 맨 끝의 <code class="i">;</code> 하나만 지우고 저장합니다.</p>
 
-<h4><span class="sn">11-2</span>재시작하지 말고 검사</h4>
+<h4><span class="sn">11-2</span>재시작 전 문법 검사</h4>
 <div class="cmd"><pre><code>sudo nginx -t</code></pre></div>
-<div class="cmd out tagged"><span class="tag">이런 오류가 나옴</span><pre><code>[emerg] invalid number of arguments in "proxy_pass" directive in /etc/nginx/sites-enabled/default:50
+<div class="cmd out tagged"><span class="tag">오류 예시</span><pre><code>[emerg] invalid number of arguments in "proxy_pass" directive in /etc/nginx/sites-enabled/default:50
 nginx: configuration file /etc/nginx/nginx.conf test failed</code></pre></div>
 <p>끝의 숫자(예: <code class="i">:50</code>)가 문제의 줄 번호입니다. 세미콜론을 지운 바로 그 <code class="i">proxy_pass</code> 줄을 가리킵니다. 줄 번호는 사람마다 조금 다를 수 있습니다.</p>
 
-<h4><span class="sn">11-3</span>고치고, 검사하고, 재시작하고, 확인</h4>
+<h4><span class="sn">11-3</span>수정, 검사, 재시작, 확인</h4>
 <div class="cmd"><pre><code>sudo nano /etc/nginx/sites-available/default</code></pre></div>
 <p>지웠던 <code class="i">;</code>를 다시 넣고 저장합니다.</p>
 <div class="cmd"><pre><code>sudo nginx -t</code></pre></div>
@@ -547,22 +589,22 @@ nginx: configuration file /etc/nginx/nginx.conf test failed</code></pre></div>
 <div class="box warn"><b class="t">인스턴스는 그대로 두세요</b>
 <ul>
   <li>AWS 콘솔에서 인스턴스를 <b>중지하거나 종료하지 않습니다</b>. 중지했다가 다시 켜면 퍼블릭 IP가 바뀝니다.</li>
-  <li><code class="i">quotation-key.pem</code> 파일을 잘 보관하세요. 2일차에 같은 파일로 접속합니다.</li>
+  <li>2일차에도 같은 <code class="i">quotation-key.pem</code> 파일로 접속합니다.</li>
 </ul></div>
 <p>서버에서 나올 때:</p>
 <div class="cmd"><pre><code>exit</code></pre></div>
 </section>
 
 <!-- ======================= 2일차 1교시 ======================= -->
-<h2 class="day">2일차 1교시 · 09:30 - 10:30</h2>
+<h2 class="day">2일차 1교시<span class="tm">09:30 - 10:30</span></h2>
 <h2 class="period">서버 상태 확인하기</h2>
-<p>강사가 화면으로 보여 주는 명령입니다. 원하면 자기 서버에서 함께 따라 해 보세요. 먼저 Step 1처럼 서버에 접속합니다.</p>
+<p>상태를 보기만 하는 명령이라 서버에 영향을 주지 않습니다. 강사 화면과 함께 내 서버에서 다 같이 실행합니다. 먼저 Step 1처럼 서버에 접속합니다.</p>
 
 <section class="step" id="s14">
 <div class="step-head"><span class="no">Step 14</span><h3>프로세스와 자원 확인</h3><label><input type="checkbox" data-done="s14">완료</label></div>
 <h4><span class="sn">14-1</span>프로세스와 서비스</h4>
 <div class="cmd"><pre><code>ps aux | grep next</code></pre></div>
-<p>우리 앱은 <code class="i">next-server</code>라는 이름으로 보입니다. 맨 끝 <code class="i">grep next</code> 줄은 방금 친 검색 명령 자신입니다.</p>
+<p>우리 앱은 <code class="i">next-server</code>라는 이름으로 보입니다. 맨 끝 <code class="i">grep next</code> 줄은 방금 실행한 검색 명령 자체입니다.</p>
 <div class="cmd"><pre><code>systemctl status quotation-lab nginx postgresql --no-pager | grep -E "●|Active"</code></pre></div>
 <h4><span class="sn">14-2</span>CPU, 메모리, 디스크</h4>
 <div class="cmd"><pre><code>top</code></pre></div>
@@ -578,12 +620,12 @@ nginx: configuration file /etc/nginx/nginx.conf test failed</code></pre></div>
 </section>
 
 <!-- ======================= 2일차 6교시 ======================= -->
-<h2 class="day">2일차 6교시 · 15:30 - 16:30</h2>
+<h2 class="day">2일차 6교시<span class="tm">15:30 - 16:30</span></h2>
 <h2 class="period">직접 고장 내고, AI와 함께 원인 찾기</h2>
-<div class="box key"><b class="t">이번 시간의 약속</b>
+<div class="box key"><b class="t">이번 시간 진행 원칙</b>
 <ul>
   <li><b>원인을 찾는 데까지만</b> 합니다. Kiro가 고치는 명령을 제안해도 실행하지 말고 메모만 해 두세요. 조치는 7교시에 합니다.</li>
-  <li>Kiro가 상태 보기, 로그 읽기처럼 <b>보기만 하는 명령</b>을 실행해도 되느냐고 물으면 허락해도 됩니다. 파일 수정, 재시작, 삭제처럼 <b>바꾸는 명령</b>은 거절합니다.</li>
+  <li>Kiro가 상태 보기, 로그 읽기처럼 <b>보기만 하는 명령</b>을 실행 허락을 요청하면 허락해도 됩니다. 파일 수정, 재시작, 삭제처럼 <b>바꾸는 명령</b>은 거절합니다.</li>
 </ul></div>
 
 <section class="step" id="s15">
@@ -603,7 +645,7 @@ nginx: configuration file /etc/nginx/nginx.conf test failed</code></pre></div>
 <ol>
   <li><b>Trust this workspace?</b> 질문이 나오면 <b>Trust, continue</b>를 고르고 엔터. 이 폴더의 파일을 읽고, 고치고, 실행해도 되느냐는 질문입니다. 홈 폴더에서는 켤 때마다 다시 묻습니다.</li>
   <li>대화 화면에서 <kbd>Shift</kbd>+<kbd>Tab</kbd>을 누릅니다. 입력창 위에 <code class="i">Plan · auto</code>가 보이면 Plan 모드입니다. 이 모드의 Kiro는 명령을 직접 실행하지 않고 제안만 합니다.</li>
-  <li>첫 문장을 보내 역할을 정합니다.</li>
+  <li>첫 메시지로 Kiro와 역할을 나눕니다.</li>
 </ol>
 <div class="cmd"><pre><code>지금부터 이 서버에서 발생하는 문제를 같이 진단해줘. 명령을 제안해주면 내가 직접 확인하고 실행할게.</code></pre></div>
 <p>Kiro가 명령을 제안하면 <b>오른쪽 창</b>에서 직접 실행하고, 결과를 복사해 Kiro에게 붙여 넣으면서 진행합니다.</p>
@@ -616,7 +658,7 @@ nginx: configuration file /etc/nginx/nginx.conf test failed</code></pre></div>
 <p>아무 메시지 없이 다음 줄로 넘어가면 실행된 것입니다.</p>
 <h4><span class="sn">16-2</span>증상 확인 (브라우저)</h4>
 <p>견적서 화면을 새로고침합니다. 화면에 나오는 문구를 그대로 적어 두세요. 아래쪽의 <code class="i">nginx</code> 글자도 확인합니다.</p>
-<h4><span class="sn">16-3</span>Kiro에게 묻고, 그동안 직접 확인</h4>
+<h4><span class="sn">16-3</span>Kiro 진단 요청과 직접 확인</h4>
 <p>왼쪽 창 Kiro에게:</p>
 <div class="cmd"><pre><code>사이트가 502 Bad Gateway 에러가 떠. 원인을 확인해줘.</code></pre></div>
 <p>답을 기다리는 동안 오른쪽 창에서 직접 확인합니다.</p>
@@ -624,7 +666,7 @@ nginx: configuration file /etc/nginx/nginx.conf test failed</code></pre></div>
 <div class="cmd"><pre><code>curl -I http://localhost:3000</code></pre></div>
 <div class="cmd"><pre><code>sudo journalctl -u quotation-lab -n 30</code></pre></div>
 <ul>
-  <li>Kiro는 이 서버를 처음 봅니다. "앱은 systemd 서비스 quotation-lab으로 돌아가"처럼 아는 정보를 주면 훨씬 빨리 좁혀 갑니다.</li>
+  <li>Kiro는 이 서버를 처음 봅니다. "앱은 systemd 서비스 quotation-lab으로 돌아가"처럼 아는 정보를 함께 주면 원인을 더 빨리 찾습니다.</li>
   <li>Kiro가 재시작 명령을 제안해도 <b>실행하지 말고</b> 메모만 합니다.</li>
 </ul>
 <div class="memo-label">기록: 원인은 무엇이었나요?</div>
@@ -635,7 +677,7 @@ nginx: configuration file /etc/nginx/nginx.conf test failed</code></pre></div>
 
 <section class="step" id="s17">
 <div class="step-head"><span class="no">Step 17</span><h3>시나리오 B: 앱은 실행 중인데 저장이 안 된다</h3><label><input type="checkbox" data-done="s17">완료</label></div>
-<h4><span class="sn">17-1</span>바꾸기 전에 백업부터 (오른쪽 창)</h4>
+<h4><span class="sn">17-1</span>변경 전 백업 (오른쪽 창)</h4>
 <div class="cmd"><pre><code>cp ~/quotation-lab/.env ~/quotation-lab/.env.backup</code></pre></div>
 <div class="cmd"><pre><code>ls -a ~/quotation-lab | grep env</code></pre></div>
 <p><code class="i">.env</code>, <code class="i">.env.backup</code>, <code class="i">.env.example</code> 세 줄이 보이면 됩니다.</p>
@@ -650,7 +692,7 @@ nginx: configuration file /etc/nginx/nginx.conf test failed</code></pre></div>
 <p><b>견적서 저장</b> 또는 <b>새 견적서로 저장</b>을 누르면 <b>저장 실패</b> 알림이 뜹니다.</p>
 <h4><span class="sn">17-5</span>서비스 상태 확인</h4>
 <div class="cmd"><pre><code>sudo systemctl status quotation-lab</code></pre></div>
-<p><code class="i">active (running)</code>, 정상으로 보입니다. 실행 중인지만 알려 줄 뿐, 정상 동작하는지는 알려 주지 않습니다.</p>
+<p><code class="i">active (running)</code>으로 정상처럼 보입니다. 이 명령은 실행 여부만 보여 주고, 기능이 정상인지는 보여 주지 않습니다.</p>
 <h4><span class="sn">17-6</span>로그 확인</h4>
 <div class="cmd"><pre><code>sudo journalctl -u quotation-lab -n 50</code></pre></div>
 <p>실패한 줄만 걸러 보려면:</p>
@@ -672,13 +714,13 @@ nginx: configuration file /etc/nginx/nginx.conf test failed</code></pre></div>
 </section>
 
 <!-- ======================= 2일차 7교시 ======================= -->
-<h2 class="day">2일차 7교시 · 16:30 - 17:30</h2>
+<h2 class="day">2일차 7교시<span class="tm">16:30 - 17:30</span></h2>
 <h2 class="period">내 서비스를 다시 정상화하기</h2>
 
 <section class="step" id="s16-4">
-<div class="step-head"><span class="no">Step 16-4</span><h3>시나리오 A 조치: 고치기 전에 지금 상태부터</h3><label><input type="checkbox" data-done="s16-4">완료</label></div>
+<div class="step-head"><span class="no">Step 16-4</span><h3>시나리오 A 조치: 현재 상태부터 확인</h3><label><input type="checkbox" data-done="s16-4">완료</label></div>
 <div class="cmd"><pre><code>sudo systemctl status quotation-lab</code></pre></div>
-<p>아마 이미 <code class="i">active</code>로 나옵니다. 6교시 17-2의 <code class="i">restart</code>가 꺼진 앱도 켰기 때문입니다. 조치 직전에는 이렇게 지금 상태를 다시 확인합니다. 조치 명령도 직접 실행해 봅니다.</p>
+<p>이미 <code class="i">active</code>로 나올 가능성이 높습니다. 6교시 17-2의 <code class="i">restart</code>가 꺼진 앱도 켰기 때문입니다. 조치 직전에는 이렇게 지금 상태를 다시 확인합니다. 조치 명령도 직접 실행해 봅니다.</p>
 <div class="cmd"><pre><code>sudo systemctl start quotation-lab
 sudo systemctl status quotation-lab</code></pre></div>
 <p><code class="i">active (running)</code>을 확인하고, 브라우저에서도 502 없이 견적서 화면이 뜨는지 확인합니다.</p>
@@ -688,8 +730,8 @@ sudo systemctl status quotation-lab</code></pre></div>
 <div class="step-head"><span class="no">Step 17-8</span><h3>시나리오 B 조치: 백업으로 되돌리기</h3><label><input type="checkbox" data-done="s17-8">완료</label></div>
 <div class="cmd"><pre><code>cp ~/quotation-lab/.env.backup ~/quotation-lab/.env
 sudo systemctl restart quotation-lab</code></pre></div>
-<p>앱은 시작할 때 <code class="i">.env</code>를 읽으므로 <b>재시작을 빼먹지 않습니다</b>. 백업을 깜빡했다면 <code class="i">nano ~/quotation-lab/.env</code>로 원래 비밀번호를 직접 넣고 재시작합니다. 비밀번호가 기억나지 않으면 손을 들어 주세요.</p>
-<h4>정상화 확인은 세 가지로</h4>
+<p>앱은 시작할 때 <code class="i">.env</code>를 읽으므로 <b>재시작을 빼먹지 않습니다</b>. 백업을 깜빡했다면 <code class="i">nano ~/quotation-lab/.env</code>로 원래 비밀번호를 직접 넣고 재시작합니다. 비밀번호가 기억나지 않으면 도움을 요청합니다.</p>
+<h4>정상화 확인 세 가지</h4>
 <ol>
   <li><b>서비스 상태</b>: <code class="i">sudo systemctl status quotation-lab</code>이 active (B는 장애 중에도 active였으니 이것만으로는 부족)</li>
   <li><b>기능</b>: 브라우저에서 견적서를 저장하고 목록에 나타나는지</li>
@@ -699,13 +741,13 @@ sudo systemctl restart quotation-lab</code></pre></div>
 </section>
 
 <section class="step" id="s18">
-<div class="step-head"><span class="no">Step 18</span><h3>종합 실습: 무슨 장애인지 모르는 상태에서</h3><label><input type="checkbox" data-done="s18">완료</label></div>
-<h4><span class="sn">18-1</span>장애 스크립트 받아서 실행 (오른쪽 창)</h4>
+<div class="step-head"><span class="no">Step 18</span><h3>종합 실습: 원인을 모르는 장애 진단</h3><label><input type="checkbox" data-done="s18">완료</label></div>
+<h4><span class="sn">18-1</span>장애 스크립트 내려받기와 실행 (오른쪽 창)</h4>
 <div class="cmd"><pre><code>cd ~
 wget https://github.com/jdinmysoul-boop/quotation-lab/releases/download/v1.0.0/chaos.sh</code></pre></div>
 <div class="cmd"><pre><code>sudo bash chaos.sh</code></pre></div>
 <p>세 가지 장애 중 하나가 무작위로 생깁니다. 화면에는 장애가 발생했다는 한 줄만 나옵니다. <b>스크립트 내용은 열어 보지 마세요.</b> 20분 안에 원인, 조치, 정상화 확인까지 해 봅니다.</p>
-<h4><span class="sn">18-2</span>3교시의 순서대로 처음부터</h4>
+<h4><span class="sn">18-2</span>3교시에 배운 순서로 진단</h4>
 <ol>
   <li><b>브라우저 증상</b>: 아예 안 뜨나(전체 다운), 화면은 뜨는데 저장이 안 되나(특정 기능)</li>
   <li><b>서비스 상태</b>: <code class="i">sudo systemctl status quotation-lab</code>, <code class="i">postgresql</code>, <code class="i">nginx</code>. 멈춘 서비스가 있다면 가장 유력한 원인</li>
@@ -718,13 +760,13 @@ wget https://github.com/jdinmysoul-boop/quotation-lab/releases/download/v1.0.0/c
 <p><code class="i">.env.backup</code>은 6교시에 내가 만든 백업, <code class="i">.env.bak_chaos</code>는 스크립트가 장애 직전에 만든 백업입니다. 비밀번호 문제라면 이번에 되돌릴 파일은 <code class="i">.env.bak_chaos</code>입니다. 만들어진 시각으로 구분합니다.</p>
 <h4><span class="sn">18-4</span>고쳤는데 또 안 된다면</h4>
 <p>장애가 두 개 겹친 경우일 수 있습니다. 하나를 고치면 처음 증상으로 돌아가 다시 확인하고, 마지막 확인은 언제나 <b>견적서 저장</b>입니다.</p>
-<div class="box key"><b class="t">10분이 지나도 좁혀지지 않으면 손 들기</b><p>무엇이 안 되는지, 언제부터인지, 무엇을 이미 확인했는지 함께 말해 주세요.</p></div>
+<div class="box key"><b class="t">10분이 지나도 원인이 좁혀지지 않을 때</b><p>강사에게 무엇이 안 되는지, 언제부터인지, 무엇을 이미 확인했는지 함께 알려 주세요.</p></div>
 <div class="memo-label">기록: 다섯 줄 장애 보고서</div>
 <textarea class="memo" data-memo="report" style="min-height:150px" placeholder="1. 무엇이 안 됐나&#10;2. 언제부터 언제까지&#10;3. 누가 영향을 받았나&#10;4. 원인&#10;5. 어떻게 고쳤나&#10;6. 다음에 막으려면"></textarea>
 </section>
 
 <section class="step" id="s19">
-<div class="step-head"><span class="no">Step 19</span><h3>인스턴스 정리 (꼭 하고 가기)</h3><label><input type="checkbox" data-done="s19">완료</label></div>
+<div class="step-head"><span class="no">Step 19</span><h3>인스턴스 정리 (요금 발생 방지 목적)</h3><label><input type="checkbox" data-done="s19">완료</label></div>
 <h4><span class="sn">19-1</span>인스턴스 종료</h4>
 <ol>
   <li>서버 창에서 <code class="i">exit</code>로 나옵니다.</li>
@@ -733,7 +775,7 @@ wget https://github.com/jdinmysoul-boop/quotation-lab/releases/download/v1.0.0/c
   <li>상태가 <b>종료됨</b>으로 바뀌는지 확인</li>
 </ol>
 <div class="box warn"><b class="t">중지가 아니라 종료</b><p>중지는 디스크가 남아 요금이 계속 나갑니다. 종료해야 서버와 디스크가 함께 정리됩니다.</p></div>
-<h4><span class="sn">19-2</span>남은 것과 쓴 금액 확인</h4>
+<h4><span class="sn">19-2</span>남은 리소스와 크레딧 확인</h4>
 <ul>
   <li>EC2 왼쪽 메뉴 <b>볼륨</b>: 남은 볼륨이 없는지</li>
   <li>콘솔 위 검색창에 <code class="i">결제</code> 입력 → <b>결제 및 비용 관리</b> → <b>크레딧</b>: 남은 크레딧과 기간 확인</li>
@@ -747,6 +789,7 @@ wget https://github.com/jdinmysoul-boop/quotation-lab/releases/download/v1.0.0/c
 <table>
 <tr><th>증상</th><th>먼저 볼 곳</th></tr>
 <tr><td>SSH 접속이 안 됨</td><td>보안그룹 22번, 퍼블릭 IP 오타, 사용자 이름 <code class="i">ubuntu</code>, 키 파일 권한 (Step 1)</td></tr>
+<tr><td>SSH가 <code class="i">Connection timed out</code>, 설정은 모두 맞음</td><td>강의장 Wi-Fi의 22번 포트 차단 가능성 → 휴대폰 테더링, 안 되면 브라우저 접속(EC2 Instance Connect, Step 1)</td></tr>
 <tr><td><code class="i">command not found</code> (systemctl 등)</td><td>프롬프트가 <code class="i">ubuntu@ip-...</code>인지 확인, 접속이 끊겼다면 다시 접속</td></tr>
 <tr><td>nano에서 저장이 안 됨</td><td><kbd>Ctrl</kbd>+<kbd>X</kbd> → <kbd>Y</kbd> → <kbd>엔터</kbd> (Mac도 <kbd>control</kbd>)</td></tr>
 <tr><td><code class="i">(END)</code>가 보이고 멈춤</td><td><kbd>q</kbd>를 누름</td></tr>
@@ -758,7 +801,7 @@ wget https://github.com/jdinmysoul-boop/quotation-lab/releases/download/v1.0.0/c
 <tr><td>서비스가 <code class="i">failed</code></td><td><code class="i">sudo journalctl -u quotation-lab -n 50</code>, 서비스 파일 경로 오타</td></tr>
 <tr><td><code class="i">nginx -t</code> 오류</td><td>오류 끝의 줄 번호에서 세미콜론, 괄호 확인</td></tr>
 <tr><td><code class="i">kiro-cli</code>를 찾을 수 없음</td><td><code class="i">exit</code> 후 다시 접속, <code class="i">kiro-cli diagnostic</code></td></tr>
-<tr><td>PING 응답 없음</td><td>정상입니다. 보안그룹이 ICMP를 막고 있음</td></tr>
+<tr><td>PING 응답 없음</td><td>정상. 보안그룹이 ICMP를 막고 있음</td></tr>
 </table>
 
 <h2 class="period" id="cheat" style="margin-top:40px">자주 쓰는 명령</h2>
@@ -773,7 +816,7 @@ wget https://github.com/jdinmysoul-boop/quotation-lab/releases/download/v1.0.0/c
 <tr><td><code class="i">ps aux | grep next</code></td><td>앱 프로세스 찾기</td></tr>
 </table>
 
-<footer>서버부터 클라우드까지, 실습으로 배우는 IT 인프라 · 멀티캠퍼스 · 강사 제이드(JAD) 장두환<br>이 페이지에 적은 기록과 체크는 내 브라우저에만 저장됩니다.</footer>
+<footer>서버부터 클라우드까지, 실습으로 배우는 IT 인프라<br>멀티캠퍼스, 강사 제이드(JAD) 장두환<br>이 페이지에 적은 기록과 체크는 내 브라우저에만 저장됩니다.</footer>
 </main>
 </div>
 
